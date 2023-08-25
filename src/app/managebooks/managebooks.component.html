@@ -1,0 +1,77 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>My Library</span>
+      <div class="search-hero">
+        <input class="form-control" type="text" style="width: 400px;" name="search" [(ngModel)]="searchText" (change)="search()" autocomplete="off" placeholder=" Start searching for a book by author or publisher or title">
+      </div>
+      <span class="example-spacer"></span>
+      <div class="demo-section"  *ngIf="isLibraryManager">
+        <button mat-raised-button color="primary" style="box-shadow: none;" title="add new book" (click)="add()">
+        <mat-icon style="color: white;" >add</mat-icon>
+        </button>
+      </div>
+      <!-- <mat-slide-toggle [(ngModel)]="tableView">Table View</mat-slide-toggle> -->
+</mat-toolbar-row>
+</mat-toolbar>
+<!-- <div *ngIf="!tableView" style="
+overflow-y: scroll;
+height: 86vh;
+">
+<div style="
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+padding-top: 20px;
+">
+    <mat-card class="example-card" *ngFor="let book of books">
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>{{book?.title}}</mat-card-title>
+            <mat-card-subtitle>{{book?.price}}</mat-card-subtitle>
+            <mat-card-subtitle>{{book?.author}}</mat-card-subtitle>
+            <mat-card-subtitle>{{book?.publisher}}</mat-card-subtitle>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+          {{book?.description}}
+        </mat-card-content>
+        <div *ngIf="isLibraryManager">
+            <button mat-raised-button  style="margin: 10px;" (click)="edit(book)"> Edit</button>
+            <button mat-raised-button style="margin: 10px;" (click)="delete(book)"> Delete</button>
+        </div>
+        <div *ngIf="!isLibraryManager">
+            <button mat-raised-button  style="margin: 10px;" (click)="borrow(book)"> Borrow</button>
+        </div>
+      </mat-card>
+</div>
+</div> -->
+
+<div *ngIf="tableView" style="height: 80vh;">
+<div  *ngIf="isLibraryManager" style="
+display: flex;
+flex-direction: row-reverse;
+padding-top: 10px;
+">
+    <button mat-button  style="box-shadow: none; margin-right: 10px;" title="add new book" (click)="cancel()"> Cancel</button>
+    <button mat-raised-button color="warn" style="box-shadow: none;margin-right: 10px;" title="add new book" (click)="delete()">Delete</button>
+    <button mat-raised-button color="primary" style="box-shadow: none;margin-right: 10px;" title="add new book" (click)="save()">Save</button>
+</div>
+<div  *ngIf="!isLibraryManager" style="
+display: flex;
+flex-direction: row-reverse;
+padding-top: 10px;
+">
+    <button mat-raised-button  color="primary" style="box-shadow: none; margin-right: 10px;" title="add new book" (click)="borrow()"> Borrow</button>
+</div>
+<ag-grid-angular
+style="width: 100%; height: 100%; padding-top: 20px;"
+    class="ag-theme-alpine"
+    [rowSelection]="'multiple'"
+    [animateRows]="true"
+    [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef"
+    [rowData]="books"
+    (cellValueChanged)="onCellValueChange($event)" 
+    (gridReady)="onGridReady($event)"
+/>
+</div>

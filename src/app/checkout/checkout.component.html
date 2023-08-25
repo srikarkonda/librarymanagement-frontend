@@ -1,0 +1,40 @@
+<div>
+    <div>
+        Product Price: {{this.totalCost}}
+    </div>
+<div>
+    Tax: {{this.tax}}
+</div>
+<div>
+   Total: {{this.totalCost + this.tax}} 
+</div>
+<div>
+    <button (click)="checkoutOrder()">checkOut</button>
+</div>
+</div>
+
+<div style="
+overflow-y: scroll;
+height: 80vh;
+">
+<div style="
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+
+">
+    <mat-card class="example-card" style="max-width: 400px;
+    margin: 10px;" *ngFor="let product of checkout">
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>{{product?.productName}}</mat-card-title>
+            <mat-card-subtitle>{{product?.productPrice}}</mat-card-subtitle>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+          {{product?.productDescription}}
+          <input type="number" [(ngModel)]="product.checkoutQuantity">
+        </mat-card-content>
+      </mat-card>
+</div>
+</div>

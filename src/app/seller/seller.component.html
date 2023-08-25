@@ -1,0 +1,57 @@
+
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>{{title}}</span>
+      <span class="example-spacer"></span>
+      <div class="demo-section">
+            <button mat-raised-button color="primary" style="box-shadow: none;"  (click)="enableForm = true">
+            <mat-icon style="color: white;" matBadge="{{sellerProducts?.length}}" aria-hidden="false"  matBadgeOverlap="false">add</mat-icon>
+        </button>
+      </div>
+      
+</mat-toolbar-row>
+</mat-toolbar>
+<div *ngIf="enableForm">
+<form (ngSubmit)="addProducts()">
+    <div>
+      <label for="productName">Product Name:</label>
+      <input type="text" id="productName" name="productName" [(ngModel)]="formData.productName" required>
+    </div>
+    <div>
+      <label for="productPrice">Product Price:</label>
+      <input type="number" id="productPrice" name="productPrice" [(ngModel)]="formData.productPrice" required>
+    </div>
+    <div>
+      <label for="productDescription">Product Description:</label>
+      <textarea id="productDescription" name="productDescription" [(ngModel)]="formData.productDescription" required></textarea>
+    </div>
+    <div>
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" name="quantity" [(ngModel)]="formData.quantity" required>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+<div *ngIf="!enableForm" style="
+overflow-y: scroll;
+height: 86vh;
+">
+<div style="
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+">
+    <mat-card class="example-card" *ngFor="let product of sellerProducts">
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>{{product?.productName}}</mat-card-title>
+            <mat-card-subtitle>{{product?.productPrice}}</mat-card-subtitle>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+          {{product?.productDescription}}
+        </mat-card-content>
+        <button (click)="edit(product)"> edit</button>
+      </mat-card>
+</div>
+</div>

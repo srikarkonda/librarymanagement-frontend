@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Student Loan Data</span>
+      <span class="example-spacer"></span>
+      <!-- <mat-slide-toggle [(ngModel)]="tableView">Table View</mat-slide-toggle> -->
+</mat-toolbar-row>
+</mat-toolbar>
+
+<div  style="height: 80vh;">
+    <div  style="
+    display: flex;
+    flex-direction: row-reverse;
+    padding-top: 10px;
+    ">
+        <button mat-raised-button color="primary" style="box-shadow: none;margin-right: 10px;" title="extend due date" (click)="extendDueDate()">Extend</button>
+    </div>
+    <ag-grid-angular
+    style="width: 100%; height: 100%; padding-top: 20px;"
+        class="ag-theme-alpine"
+        [rowSelection]="'multiple'"
+        [animateRows]="true"
+        [columnDefs]="columnDefs"
+        [defaultColDef]="defaultColDef"
+        [rowData]="loans"
+        (gridReady)="onGridReady($event)"
+    />
+    </div>
